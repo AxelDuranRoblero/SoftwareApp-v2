@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ItemApp',
 ]
 
 MIDDLEWARE = [
@@ -74,8 +75,15 @@ WSGI_APPLICATION = 'SoftwareApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'app',
+        'USER': 'root',
+        'PASSWORD': '2006',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {'ssl-mode': 'REQUIRED'},
+        },
     }
 }
 
