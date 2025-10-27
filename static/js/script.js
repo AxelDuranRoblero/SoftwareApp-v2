@@ -31,13 +31,12 @@ form.addEventListener('submit', function(e) {
     const identificador = document.getElementById('identificador').value;
     const fechaNacimiento = document.getElementById('fecha_nacimiento').value;
     
-    // Validar que se haya seleccionado un país
+    
     if (!pais) {
         showAlert('Por favor seleccione su país', 'error');
         return;
     }
     
-    // Validar edad
     const edad = calculateAge(fechaNacimiento);
     if (edad < 18) {
         showAlert('Debe ser mayor de 18 años para acceder', 'error');
@@ -45,11 +44,11 @@ form.addEventListener('submit', function(e) {
         return;
     }
     
-    // Simular envío exitoso
+   
     showAlert(`¡Bienvenido ${nombre}!
 Datos recibidos correctamente`, 'success');
     
-    // Aquí puedes agregar la lógica para enviar los datos al servidor
+
     console.log({
         nombre,
         email,
@@ -58,13 +57,10 @@ Datos recibidos correctamente`, 'success');
         fechaNacimiento,
         edad
     });
-    // Opcional: redirigir después de 2 segundos
-    // setTimeout(() => {
-    //     window.location.href = '/dashboard';
-    // }, 2000);
+ 
 });
 
-// Prevenir envío de formulario al presionar Enter en los campos
+
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && input.type !== 'submit') {

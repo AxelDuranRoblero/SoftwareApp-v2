@@ -15,7 +15,7 @@ body {
     height: 100vh;
 }
 
-/* Panel Izquierdo */
+
 .left-panel {
     width: 45%;
     background: linear-gradient(135deg, #FF4444 0%, #FF6B35 100%);
@@ -126,7 +126,7 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-/* Panel Derecho */
+
 .right-panel {
     width: 55%;
     background: #f8f9fa;
@@ -265,7 +265,7 @@ body {
     transform: translateY(0);
 }
 
-/* Responsive */
+
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
