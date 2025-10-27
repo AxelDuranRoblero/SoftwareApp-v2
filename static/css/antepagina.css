@@ -2,13 +2,13 @@
 */
 
 body {
-    background-color: #f8f9fa; /* Fondo gris claro */
+    background-color: #FF6B35; /* Fondo gris claro */
 }
 
 /* Estilo para el cuadro grande de "NUAM"
 */
 .jumbotron-personalizado {
-    background-color: #ffffff; /* Fondo blanco */
+    background-color: #555353; /* Fondo blanco */
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -21,6 +21,6 @@ body {
     border-color: #FF6B35;
 }
 .btn-success {
-    background-color: #00a8e8; /* Azul */
-    border-color: #00a8e8;
+    background-color: #FF6B35; /* Azul */
+    border-color: #FF6B35;
 }
