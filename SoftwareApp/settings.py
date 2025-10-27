@@ -80,19 +80,13 @@ WSGI_APPLICATION = 'SoftwareApp.wsgi.application'
 
 
 import os
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQLDATABASE'),  # Sin guión bajo
-        'USER': os.environ.get('MYSQLUSER'),      # Sin guión bajo
-        'PASSWORD': os.environ.get('MYSQLPASSWORD'),  # Sin guión bajo
-        'HOST': os.environ.get('MYSQLHOST'),      # Sin guión bajo
-        'PORT': os.environ.get('MYSQLPORT'),      # Sin guión bajo
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        }
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('MYSQL_URL'),
+        conn_max_age=600,
+    )
 }
 
 # Password validation
