@@ -29,10 +29,13 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '.railway.app',  # Acepta todos los subdominios de railway.app
-     # Si tienes dominio personalizado
+    'softwareapp-production.up.railway.app',  # Tu dominio específico
 ]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://softwareapp-production.up.railway.app',
+    'https://*.railway.app',  # Acepta todos los subdominios
+]
 # Application definition
 
 INSTALLED_APPS = [
