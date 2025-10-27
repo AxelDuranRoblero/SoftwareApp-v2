@@ -26,9 +26,10 @@ SECRET_KEY = 'django-insecure-bn&s$avtz$i0ig07%%so&cq#06u%uby(oi3^n-!#q(@y(oai_a
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://softwareapp-0xek.onrender.com', # Reemplaza con el nombre de tu servicio web
+    'localhost',
     '127.0.0.1',
-    'localhost'
+    '.railway.app',  # Acepta todos los subdominios de railway.app
+     # Si tienes dominio personalizado
 ]
 
 
@@ -123,7 +124,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+
+
+# En settings.py
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Middleware para servir archivos estáticos
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Agrega esto
+    # ... resto de middleware
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
