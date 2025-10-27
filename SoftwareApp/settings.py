@@ -15,8 +15,9 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
+# Esta es tu definición para la carpeta 'static' raíz. ¡Correcto!
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 
 # Quick-start development settings - unsuitable for production
@@ -51,13 +52,15 @@ INSTALLED_APPS = [
     'ItemApp',
 ]
 
+# Este es el bloque MIDDLEWARE correcto, con whitenoise
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- ¡Correcto!
+    'django.contrib.sessions.middleware.SessionMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware', 
+    'django.contrib.messages.middleware.MessageMiddleware', 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -83,8 +86,6 @@ WSGI_APPLICATION = 'SoftwareApp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-
 
 import dj_database_url
 
@@ -129,22 +130,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# Este es el bloque de configuración de ESTÁTICOS COMPLETO y CORREGIDO
 
-
-# En settings.py
+# La URL para acceder a los archivos estáticos
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [STATIC_DIR]
 
+# 1. La carpeta donde 'collectstatic' (de Railway) pondrá TODOS los archivos para producción.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware', 
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  
-    'django.contrib.messages.middleware.MessageMiddleware',  
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+# 2. El motor que usará whitenoise para servir esos archivos.
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# 3. La carpeta donde Django buscará TUS archivos (static/css/styles.css).
+#    (Usa la variable STATIC_DIR que definiste al inicio)
+STATICFILES_DIRS = [
+    STATIC_DIR,
 ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -153,5 +155,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
-# Al final de SoftwareApp/settings.py
