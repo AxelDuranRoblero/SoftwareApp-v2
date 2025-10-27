@@ -1,0 +1,17 @@
+/* Estilos para la página de login (usuario/contraseña)
+*/
+
+body {
+    background-color: #f8f9fa; 
+}
+
+/* ¡CAMBIO AQUÍ!
+  Le damos la clase 'form-personalizado' al 'div' 
+  para no afectar a otros formularios.
+*/
+.form-personalizado {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}

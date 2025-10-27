@@ -1,0 +1,26 @@
+/* Estilos para la portada (antepagina.html)
+*/
+
+body {
+    background-color: #f8f9fa; /* Fondo gris claro */
+}
+
+/* Estilo para el cuadro grande de "NUAM"
+*/
+.jumbotron-personalizado {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Opcional: Estilo para los botones 
+  (Bootstrap ya los colorea, pero aquí puedes personalizarlos) 
+*/
+.btn-primary {
+    background-color: #FF6B35; /* Naranja */
+    border-color: #FF6B35;
+}
+.btn-success {
+    background-color: #00a8e8; /* Azul */
+    border-color: #00a8e8;
+}
