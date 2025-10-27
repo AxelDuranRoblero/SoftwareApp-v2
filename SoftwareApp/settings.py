@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-bn&s$avtz$i0ig07%%so&cq#06u%uby(oi3^n-!#q(@y(oai_a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://softwareapp-0xek.onrender.com', # Reemplaza con el nombre de tu servicio web
+    '127.0.0.1',
+    'localhost'
+]
 
 
 # Application definition
@@ -73,20 +77,22 @@ WSGI_APPLICATION = 'SoftwareApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'app',
-        'USER': 'root',
-        'PASSWORD': '2006',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.environ.get('MYSQL_DATABASE', 'railway'),
+        'USER': os.environ.get('MYSQL_USER', 'root'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '2006'),
+        'HOST': os.environ.get('MYSQL_HOST', 'localhost'),
+        'PORT': os.environ.get('MYSQL_PORT', '3306'),
         'OPTIONS': {
-            'ssl': {'ssl-mode': 'REQUIRED'},
-        },
+            'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
