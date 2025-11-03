@@ -18,6 +18,7 @@ def vista_inicio_logueado(request):
     return render(request, 'inicio.html')
 
 @login_required
+@login_required
 def carga_datos(request):
     if request.method == 'POST':
         form = ArchivoForm(request.POST, request.FILES)
