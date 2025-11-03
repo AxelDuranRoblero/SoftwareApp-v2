@@ -14,6 +14,7 @@ urlpatterns = [
     path('logout/', vistas.LogoutView.as_view(), name='logout'),
     path('carga_datos/', item_views.vista_carga_datos, name='carga_datos'),
     path('crear_calificacion/', item_views.vista_crear_calificacion, name='crear_calificacion'),
+    path('reportes/', item_views.vista_reportes, name='reportes'),
 ]
 
 from django.conf import settings

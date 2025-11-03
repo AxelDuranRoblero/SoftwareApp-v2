@@ -37,3 +37,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def vista_crear_calificacion(request):
     return render(request, 'crear_calificacion.html')
+
+@login_required
+def vista_reportes(request):
+    return render(request, 'reportes.html')
