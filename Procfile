@@ -1,5 +1,5 @@
 release: python manage.py migrate
-web: gunicorn SoftwareApp.wsgi
+web: gunicorn SoftwareApp-V2.wsgi
 
 
 
