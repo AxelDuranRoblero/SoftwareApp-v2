@@ -13,6 +13,7 @@ urlpatterns = [
     path('inicio/', item_views.vista_inicio_logueado, name='inicio'),
     path('logout/', vistas.LogoutView.as_view(), name='logout'),
     path('carga_datos/', item_views.vista_carga_datos, name='carga_datos'),
+    path('crear_calificacion/', item_views.vista_crear_calificacion, name='crear_calificacion'),
 ]
 
 from django.conf import settings
