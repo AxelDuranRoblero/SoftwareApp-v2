@@ -1,8 +1,8 @@
+# models.py
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
-# Create your models here.
-
 
 class CalificacionTributaria(models.Model):
     TIPO_INSTRUMENTO_CHOICES = [
@@ -36,22 +36,22 @@ class CalificacionTributaria(models.Model):
         ('trimestral', 'Trimestral'),
     ]
     
-
+    # Información del Emisor
     emisor = models.CharField(max_length=200, verbose_name="Nombre del Emisor")
     rut_emisor = models.CharField(max_length=12, verbose_name="RUT Emisor")
     pais = models.CharField(max_length=20, choices=PAIS_CHOICES, verbose_name="País")
     
-
+    # Información del Instrumento
     tipo_instrumento = models.CharField(max_length=50, choices=TIPO_INSTRUMENTO_CHOICES, verbose_name="Tipo de Instrumento")
     nemotecnico = models.CharField(max_length=20, verbose_name="Nemotécnico")
     estado_inscripcion = models.CharField(max_length=20, choices=ESTADO_INSCRIPCION_CHOICES, verbose_name="Estado de Inscripción")
     
-
+    # Información Tributaria
     tipo_declaracion = models.CharField(max_length=50, choices=TIPO_DECLARACION_CHOICES, verbose_name="Tipo de Declaración")
     ano_tributario = models.IntegerField(verbose_name="Año Tributario", validators=[MinValueValidator(2020), MaxValueValidator(2030)])
     periodo = models.CharField(max_length=20, choices=PERIODO_CHOICES, verbose_name="Período")
     
-
+    # Montos y Factores
     monto_distribuido = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Monto Distribuido")
     factor_actualizacion = models.DecimalField(max_digits=10, decimal_places=4, blank=True, null=True, default=1.0000, verbose_name="Factor de Actualización")
     credito_fiscal = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Crédito Fiscal (%)")
@@ -59,14 +59,14 @@ class CalificacionTributaria(models.Model):
     monto_actualizado = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, verbose_name="Monto Actualizado")
     impuesto_calculado = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, verbose_name="Impuesto Calculado")
     
-
+    # Información del Corredor
     corredor = models.CharField(max_length=200, verbose_name="Corredor de Bolsa")
     fecha_registro = models.DateField(verbose_name="Fecha de Registro")
     
-
+    # Observaciones
     observaciones = models.TextField(blank=True, null=True, verbose_name="Observaciones")
     
-
+    # Metadatos y Auditoría
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Usuario", related_name='calificaciones')
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     fecha_modificacion = models.DateTimeField(auto_now=True, verbose_name="Última Modificación")
@@ -86,7 +86,7 @@ class CalificacionTributaria(models.Model):
         return f"{self.emisor} - {self.nemotecnico} - {self.ano_tributario}"
     
     def save(self, *args, **kwargs):
-
+        # Calcular montos si hay datos
         if self.monto_distribuido:
             factor = self.factor_actualizacion or Decimal('1.0000')
             self.monto_actualizado = self.monto_distribuido * factor
@@ -97,7 +97,7 @@ class CalificacionTributaria(models.Model):
         super().save(*args, **kwargs)
 
 
-
+# Modelo para auditoría de cambios
 class AuditoriaCalificacion(models.Model):
     ACCION_CHOICES = [
         ('crear', 'Crear'),
@@ -119,6 +119,3 @@ class AuditoriaCalificacion(models.Model):
     
     def __str__(self):
         return f"{self.accion} - {self.calificacion} - {self.fecha_accion}"
-
-
-

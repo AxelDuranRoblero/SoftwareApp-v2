@@ -4,7 +4,7 @@
 {% block title %}Dashboard Principal{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -12,21 +12,21 @@
     <aside class="sidebar">
         <div class="profile">
             <div class="profile-img">👨</div>
-            <h3>{{ user.username|default:"Benjamin Rojas" }}</h3>
+            <h3>{{ user.username }}</h3>
             <button class="btn-profile">Perfil</button>
         </div>
         <ul class="menu">
-            <li class="active">🏠 Principal</li>
-            <li>📋 Crear Calificacion</li>
-            <li>📊 Carga de Datos</li>
-            <li>📈 Reportes</li>
+            <li class="active"><a href="{% url 'inicio' %}">🏠 Principal</a></li>
+            <li><a href="{% url 'crear_calificacion' %}">📋 Crear Calificacion</a></li>
+            <li><a href="{% url 'carga_datos' %}">📊 Carga de Datos</a></li>
+            <li><a href="{% url 'reportes' %}">📈 Reportes</a></li>
         </ul>
     </aside>
 
     <main class="main-content">
         <header class="header">
             <div class="greeting">
-                <h1>Buenos días<span>, {{ user.username|default:"Benjamin" }}</span></h1>
+                <h1>Buenos días<span>, {{ user.username }}</span></h1>
             </div>
             <div class="header-actions">
                 <div class="search-box">
@@ -101,16 +101,16 @@
 </div>
 
 <script>
-    // Actualizar fecha y hora en tiempo real
+
     function updateDateTime() {
         const now = new Date();
         
-        // Actualizar hora
+
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         document.getElementById('current-time').textContent = `${hours}:${minutes}`;
         
-        // Actualizar fecha
+
         const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
         const day = now.getDate();
@@ -120,7 +120,7 @@
         document.getElementById('current-date').innerHTML = `${day} de ${month}<br>${year}`;
     }
     
-    // Actualizar cada segundo
+
     updateDateTime();
     setInterval(updateDateTime, 1000);
 </script>
