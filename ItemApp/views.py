@@ -30,9 +30,6 @@ def carga_datos(request):
     archivos = Archivo.objects.all().order_by('-fecha_subida')
     return render(request, 'carga_datos.html', {'form': form, 'archivos': archivos})
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def vista_crear_calificacion(request):
     return render(request, 'crear_calificacion.html')
