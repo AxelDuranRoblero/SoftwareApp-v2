@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'SoftwareApp.wsgi.application'
 
 import dj_database_url
 
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('MYSQL_URL'),
+        default='mysql://root:vfZLGmEPpMEpdGaWfkThPxMfooeGYHlm@mysql.railway.internal:3306/railway',
         conn_max_age=600,
     )
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
