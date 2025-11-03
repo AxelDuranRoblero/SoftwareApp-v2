@@ -18,17 +18,16 @@ def vista_inicio_logueado(request):
     return render(request, 'inicio.html')
 
 @login_required
-def vista_carga_datos(request):
-    archivos = Archivo.objects.filter(usuario=request.user).order_by('-fecha_subida') # type: ignore
+def carga_datos(request):
     if request.method == 'POST':
         form = ArchivoForm(request.POST, request.FILES)
         if form.is_valid():
-            archivo = form.save(commit=False)
-            archivo.usuario = request.user
-            archivo.save()
+            form.save()
             return redirect('carga_datos')
     else:
         form = ArchivoForm()
+
+    archivos = Archivo.objects.all().order_by('-fecha_subida')
     return render(request, 'carga_datos.html', {'form': form, 'archivos': archivos})
 
 from django.shortcuts import render
