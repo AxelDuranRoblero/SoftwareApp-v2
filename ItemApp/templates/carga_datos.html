@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Carga de Datos{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/califacion.css' %}">
+
+{% block content %}
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-img">👨</div>
+            <h3>{{ user.username }}</h3>
+            <button class="btn-profile">Perfil</button>
+        </div>
+        <ul class="menu">
+            <li><a href="{% url 'inicio' %}">🏠 Principal</a></li>
+            <li><a href="{% url 'crear_calificacion' %}">📋 Crear Calificación</a></li>
+            <li class="active"><a href="{% url 'carga_datos' %}">📊 Carga de Datos</a></li>
+            <li><a href="{% url 'reportes' %}">📈 Reportes</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <h1>Carga de Archivos</h1>
+        </header>
+
+        <div class="upload-section">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-upload">Subir Archivo</button>
+            </form>
+        </div>
+
+        <section class="files-list">
+            <h2>Archivos Subidos</h2>
+            <ul>
+                {% for archivo in archivos %}
+                <li>
+                    <a href="{{ archivo.archivo.url }}" target="_blank">{{ archivo.nombre }}</a>
+                    <span>— {{ archivo.fecha_subida|date:"d M Y H:i" }}</span>
+                </li>
+                {% empty %}
+                <li>No hay archivos subidos aún.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</div>
+{% endblock %}

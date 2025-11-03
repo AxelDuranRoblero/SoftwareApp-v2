@@ -12,8 +12,11 @@ urlpatterns = [
     ), name='login'),
     path('inicio/', item_views.vista_inicio_logueado, name='inicio'),
     path('logout/', vistas.LogoutView.as_view(), name='logout'),
-    path('crear-calificacion/', item_views.crear_calificacion, name='crear_calificacion'),
-    path('calificaciones/', item_views.listar_calificaciones, name='listar_calificaciones'),
-    path('modificar-calificacion/<int:id>/', item_views.modificar_calificacion, name='modificar_calificacion'),
-    path('eliminar-calificacion/<int:id>/', item_views.eliminar_calificacion, name='eliminar_calificacion'),
+    path('carga_datos/', item_views.vista_carga_datos, name='carga_datos'),
+
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
