@@ -1,5 +1,2 @@
-release: python manage.py migrate
-web: gunicorn SoftwareApp-V2.wsgi
-
-
-
+release: python manage.py migrate && python manage.py collectstatic --noinput
+web: gunicorn SoftwareApp-v2.wsgi
