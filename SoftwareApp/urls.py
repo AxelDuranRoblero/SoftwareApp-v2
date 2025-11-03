@@ -13,7 +13,6 @@ urlpatterns = [
     path('inicio/', item_views.vista_inicio_logueado, name='inicio'),
     path('logout/', vistas.LogoutView.as_view(), name='logout'),
     path('carga_datos/', item_views.vista_carga_datos, name='carga_datos'),
-
 ]
 
 from django.conf import settings
